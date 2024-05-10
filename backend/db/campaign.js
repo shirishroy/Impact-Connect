@@ -21,13 +21,38 @@ const CampaignSchema = new mongoose.Schema({
         type : String,
     },
     requirements : {
-        type : Array,
+        type : [
+            {
+                "type" : String,
+                "required" : Number,
+                "fulfilled" : Number,
+                "description" : String
+            }
+        ],
         required : true
     },
     type : {
         type : String,
         required : true
-    }
+    },
+    video : {
+        type : String,
+    },
+    location : {
+        type : [String],
+        required : true
+    },
+    brochure : {
+        type : String,
+    },
+    startDate : {
+        type : Date,
+        required : true
+    },
+    endDate : {
+        type : Date,
+        required : true
+    },
 });
 
 const Campaign = mongoose.model('Campaign', CampaignSchema);

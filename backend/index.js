@@ -3,7 +3,7 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const { dbConnect } = require('./db');
+const { dbConnect } = require('./db/db');
 const io = new Server(server);
 
 await dbConnect();
