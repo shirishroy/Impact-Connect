@@ -5,12 +5,12 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const { dbConnect } = require('./db/db');
 const io = new Server(server);
+dbConnect();
 
-await dbConnect();
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
+
+app.use(express.json())
+app.use('/api', require("./Routes/CreateUser"));
 
 io.on('connection', (socket) => {
   console.log('a user connected');
