@@ -20,16 +20,30 @@ router.post("/createuser", [
     let secPassword = await bcrypt.hash(req.body.password, salt);
   
     try {
-      await user.create({
+      const user_1 = new user({
         name: req.body.name,
         password: secPassword,
         email: req.body.email,
         location: req.body.location
       });
-      res.json({ success: true });
+      const newuser = await user_1.save();
+
+      const authToken = jwt.sign({
+        userId : newuser._id
+      }, jwtSecret);
+      res.cookie('jwt',authToken);
+      res.json({ 
+        success: true,
+        user : newuser,
+        authToken
+      });
+
     } catch (error) {
       console.log(error);
-      res.json({ success: false });
+      res.status(500).json({ 
+        success: false,
+        error
+      });
     }
   });
 
@@ -51,16 +65,17 @@ router.post("/createuser", [
       if (!pwdCompare) { // Corrected condition
         return res.status(400).json({ errors: "try logging with correct credentials" });
       }
-      const data = {
-        user: {
-          id: userData.id
-        }
-      }
-      const authToken = jwt.sign(data, jwtSecret);
-      return res.json({ success: true, authToken: authToken }); // Return success response
+
+      const authToken = jwt.sign({
+        userId : userData._id
+      }, jwtSecret);
+
+      res.cookie('jwt',authToken);
+      
+      return res.json({ success: true, user : userData }); // Return success response
     } catch (error) {
       console.log(error);
-      res.json({ success: false });
+      res.json({ success: false , error});
     }
   });
   
