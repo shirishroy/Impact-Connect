@@ -18,7 +18,8 @@ dbConnect();
 app.use(cors());
 app.use(express.json());
 app.use('/api', require("./Routes/CreateUser"));
-
+app.use('/chat', require("./Routes/Chat"));
+app.use('/campaign', require("./Routes/Campaign"));
 const socket_store = {};
 
 app.get('/', (req, res) => {
@@ -36,6 +37,10 @@ io.on('connection', (socket) => {
     saveMessageToDb(data);
   });
 
+  socket.on('disconnect', () => {
+    console.log('Disconnected: ', token);
+    delete socket_store[token];
+  });
 });
 
 server.listen(3000, async() => {

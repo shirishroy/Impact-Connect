@@ -22,8 +22,11 @@ const CampaignSchema = new mongoose.Schema({
             {
                 "type" : String,
                 "required" : Number,
-                "fulfilled" : Number,
-                "description" : String
+                "fulfilled" : {
+                    type : Number,
+                    default : 0
+                },
+                // "description" : String
             }
         ],
         required : true
@@ -50,6 +53,35 @@ const CampaignSchema = new mongoose.Schema({
         type : Date,
         required : true
     },
+    donors : {
+        type : [
+            {
+                "userId" : {
+                    type : mongoose.Schema.Types.ObjectId,
+                    ref : 'User'
+                },
+                "donation" : [
+                    {
+                        "type" : String,
+                        "amount" : Number
+                    }
+                ]
+            }
+        ],
+        default : []
+    },
+    volunteers : {
+        type : [
+            {
+                "userId" : {
+                    type : mongoose.Schema.Types.ObjectId,
+                    ref : 'User'
+                },
+                "position" : String
+            }
+        ],
+        default : []
+    }
 });
 
 const Campaign = mongoose.model('Campaign', CampaignSchema);
