@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Landing from './pages/Landing';
 import store from './store';
+import Auth from './pages/Auth'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Chat from './pages/Chat';
@@ -15,9 +16,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
-          {/* <Route path="/home" element={<Home />} />
-          <Route path="/campaign/:id" element={<Campaign />} />
-          <Route path="/auth" element={<Auth />} /> */}
+          <Route path="/auth" element={<Auth />} />
           <Route path="/chat" element={<Chat />} />
           <Route path='/create-campaign' element={<CreateCampaign />} />
         </Routes>
