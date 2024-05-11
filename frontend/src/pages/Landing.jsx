@@ -14,12 +14,12 @@ export default function Landing(){
             </div>
             <div>
                 <button onClick={()=>{
-                    dispatch(dataActions.setValue({value : value+1}))
+                    dispatch(dataActions.setValue({val : value+1}))
                 }}>
                     increment
                 </button>
                 <button onClick={()=>{
-                    dispatch(dataActions.setValue({value : value-1}))
+                    dispatch(dataActions.setValue({val : value-1}))
                 }}>
                     decrement
                 </button>

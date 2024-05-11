@@ -33,7 +33,7 @@ const dataSlice = createSlice({
         setValue(state, action){
             const newState = {
                 ...state,
-                value : action.payload.value
+                value : action.payload.val
             }
             return newState;
         }
