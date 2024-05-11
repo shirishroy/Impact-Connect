@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Landing from './pages/Landing';
 import store from './store';
-import Auth from './pages/Auth/Auth'
+import Auth from './pages/Auth'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Chat from './pages/Chat';
