@@ -1,8 +1,11 @@
 const Chat = require("./chat");
+const { dbConnect } = require("./db");
 
 async function saveMessageToDb(data){
     const { userId, message, to } = data;
     
+    await dbConnect();
+
     try{
         const chat = await Chat.findOne({
             userIds : [ userId, to ]
