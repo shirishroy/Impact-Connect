@@ -1,23 +1,24 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { connectSocket, disconnectSocket, getSocket } from "../lib/socket";
+import { toast } from "react-toastify";
 
 export default function Chat() {
+    const dispatch = useDispatch();
+    const chats = useSelector(state => state.data.chats);
+    const user = useSelector(state => state.data.user);
+    const navigate = useNavigate();
 
-    // const chats = useSelector(state => state.chat.chats);
-    // const userId = useSelector(state => state.user._id);
-    // const userId = '1234';
-
-    // useEffect(()=>{
-    //     const socket = getSocket(userId);
-
-    //     return ()=>{
-    //         disconnectSocket();
-    //     }
-    // },[]);
+    useEffect(()=>{
+        if(!user){
+            navigate('/');
+            toast.warn("Please Login to continue");
+        }
+    },[]);
 
     return <>
-    Hello
+    
     </>
 
 }

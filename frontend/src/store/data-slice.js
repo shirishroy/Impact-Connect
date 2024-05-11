@@ -4,6 +4,7 @@ const dataSlice = createSlice({
     name : "data",
     initialState : {
         chats : [],
+        currentChat : null,
         loggedIn : false,
         user : null,
         value : 0
