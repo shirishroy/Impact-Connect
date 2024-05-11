@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const { dbConnect } = require('./db');
-
-await dbConnect();
 
 const CampaignSchema = new mongoose.Schema({
     userId : {
