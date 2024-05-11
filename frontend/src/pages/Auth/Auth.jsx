@@ -8,7 +8,7 @@ const AuthPage = () => {
             <Flex justifyContent={"center"} alignItems={"center"} gap={14}>
                 {/*left*/}
                 <Box display={{base:"none", md:"block"}}>
-                  <Image src='/auth.png' h={650} alt='home img' />
+                  <Image src='/img' h={650} alt='home img' />
                 </Box>
                 {/*right*/}
                 <VStack spacing={4} align={"stretch"}>
