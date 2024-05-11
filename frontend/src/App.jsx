@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Chat from './pages/Chat';
 
 function App() {
+  // sample comment
   return (
     <Provider store={store}>
       <BrowserRouter>
