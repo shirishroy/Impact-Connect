@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { connectSocket, disconnectSocket, getSocket } from "../lib/socket";
 import { toast } from "react-toastify";
+import Navbar from "@/components/Navbar/Navbar";
 
 export default function Chat() {
     const dispatch = useDispatch();
@@ -18,7 +19,6 @@ export default function Chat() {
     },[]);
 
     return <>
-    
+        <Navbar />
     </>
-
 }

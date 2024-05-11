@@ -1,10 +1,11 @@
+import Navbar from '@/components/Navbar/Navbar';
 import { useState } from 'react';
 
 export default function CreateCampaign() {
   // State variables to store form data
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [images, setImages] = useState([]);
+  const [image, setImage] = useState([]);
   const [type, setType] = useState('');
   const [video, setVideo] = useState(null);
   const [location, setLocation] = useState('');
@@ -16,11 +17,12 @@ export default function CreateCampaign() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Process form data here, e.g., send it to a server
-    console.log({ title, description, images, type, video, location, startDate, endDate, contactPhone });
+    console.log({ title, description, image, type, video, location, startDate, endDate, contactPhone });
   };
 
   return (
     <div className="min-h-screen bg-cover bg-center" style={{backgroundImage: `url('https://vastphotos.com/files/uploads/photos/10994/peaceful-nature-photo-l.jpg?v=20220712073521')`}}>
+    <Navbar />
     <div className="flex justify-center items-center h-full py-3">
       <div className="max-w-xl w-full bg-white p-6 rounded-md shadow-md ">
         <h2 className="text-2xl font-bold mb-6 text-center">Create Campaign</h2>
@@ -34,8 +36,14 @@ export default function CreateCampaign() {
           <textarea id="description" rows="3" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md p-2" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
         </div>
         <div>
-          <label htmlFor="images" className="block text-sm font-medium text-gray-700">Images</label>
-          <input type="file" id="images" accept="image/png, image/jpeg" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md p-2" onChange={(e) => setImages(e.target.files)} multiple />
+          <label htmlFor="images" className="block text-sm font-medium text-gray-700">Image</label>
+          <input type="file" id="images" accept="image/png, image/jpeg" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md p-2" 
+            onChange={(e) => {
+              setImage(e.target.files[0]);
+
+            }}
+
+          />
         </div>
         <div>
           <label htmlFor="video" className="block text-sm font-medium text-gray-700">Video</label>
@@ -43,9 +51,9 @@ export default function CreateCampaign() {
         </div>
       
         <div>
-          <label htmlFor="type" className="block text-sm font-medium text-gray-700">Type</label>
+          <label htmlFor="type" className="block text-sm font-medium text-gray-700">Domain</label>
           <select id="type" className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border-gray-300 rounded-md p-2" value={type} onChange={(e) => setType(e.target.value)}>
-            <option value="">Select Type</option>
+            <option value="">Select Domain</option>
             <option value="Food Security">Food Security</option>
             <option value="Child Education">Child Education</option>
             <option value="Women Empowerment">Women Empowerment</option>

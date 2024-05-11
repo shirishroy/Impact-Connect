@@ -1,39 +1,64 @@
-import React, { useState } from 'react';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const Navbar = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.data.user);
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    setIsLogin(true);
-  };
+  useEffect(()=>{
+    //access token and make calls to get user data from db
+  },[]);
 
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
-        <div className="flex items-center text-white">
-          <span className="text-xl font-bold">Navbar</span>
+    <nav className="bg-green-800 p-4 font-sans">
+      <div className="max-w-6xl mx-auto flex justify-between items-center cursor-pointer">
+        <div className="flex items-center text-white" onClick={()=>{
+          navigate('/');
+        }}>
+          <span className="text-xl font-bold">Impact Connect</span>
         </div>
-        <ul className="flex space-x-4">
+        <ul className="flex space-x-4 items-center">
           <li>
-            <a href="#" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
-              Home
-            </a>
+            <button className="text-white hover:bg-lime-950 px-3 py-2 rounded-md"
+            onClick={()=>{
+              navigate('/campaigns')
+            }}
+            >
+              Campaigns
+            </button>
           </li>
           <li>
-            <a href="#" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
-              About
-            </a>
+            <button className="text-white hover:bg-lime-950 px-3 py-2 rounded-md"
+              onClick={()=>{
+                navigate('/chat')
+              }}
+              >
+              Chat
+            </button>
           </li>
           <li>
-            <a href="#" className="text-white hover:bg-gray-700 px-3 py-2 rounded-md">
-              Contact
-            </a>
+            <button className="text-white hover:bg-lime-950 px-3 py-2 rounded-md"
+              onClick={()=>{
+                navigate('/create-campaign')
+              }}
+            >
+              Create Campaign
+            </button>
           </li>
           <li>
-            <a href="#" className="flex items-center text-white hover:bg-gray-700 px-3 py-2 rounded-md">
-              {!isLogin ? (
-                <button onClick={handleLogin} className="  text-white font-bold rounded">
-                  Log-In
+            <a href="#" className="flex items-center text-white hover:bg-lime-950 px-3 py-2 rounded-md">
+              {user === null ? (
+                <button 
+                className="text-white font-bold rounded"
+                onClick={()=>{
+                  navigate('/auth');
+                }}
+                >
+                  Log-In | Sign-Up
                 </button>
               ) : (
                 <img

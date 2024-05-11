@@ -7,6 +7,9 @@ import Auth from './pages/Auth'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Chat from './pages/Chat';
+import CreateCampaign from './pages/CreateCampaign';
+import Camping from './components/Campaign/Camping';
+import Campaigns from './pages/Campaigns';
 
 function App() {
   // sample comment
@@ -18,7 +21,8 @@ function App() {
           <Route path="/auth" element={<Auth />} />
           <Route path="/chat" element={<Chat />} />
           <Route path='/create-campaign' element={<CreateCampaign />} />
-          <Route path='/campaign' element={<Campaign />} />
+          <Route path='/campaign' element={<Camping />} />
+          <Route path="/campaigns" element={<Campaigns />} />
         </Routes>
       </BrowserRouter>
       <ToastContainer 

@@ -149,7 +149,7 @@
 
 // export default Camping;
 
-import React from 'react';
+import Navbar from '../Navbar/Navbar';
 
 const Camping = () => {
     const props = {
@@ -180,8 +180,10 @@ const Camping = () => {
         volunteer : []
     }
 
-    return (
+    return (<>
+        <Navbar />
         <div className="bg-green-50 min-h-screen py-10">
+            
             <div className="max-w-5xl mx-auto">
                 <div className="flex justify-around p-5">
                     <div className="flex items-center gap-10">
@@ -235,6 +237,7 @@ const Camping = () => {
                 </div>
             </div>
         </div>
+    </>
     );
 };
 

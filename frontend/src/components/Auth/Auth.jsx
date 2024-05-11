@@ -17,6 +17,7 @@ const Auth = () => {
         password: "",
         confirmPassword: "",
         location: "",
+        type : "user"
     });
     const dispatch = useDispatch();
 
@@ -35,12 +36,14 @@ const Auth = () => {
                 name: inputs.name,
                 password: inputs.password,
                 email: inputs.email,
-                location: inputs.location
+                location: inputs.location,
+                role : inputs.type
             });
             
             if (res.data.success) {
                 localStorage.setItem('jwt',res.data.authToken);
                 toast.success("Welcome to Impact Connect");
+                dispatch(dataActions.setUser({ value : res.data.user }));
                 navigate("/"); // Redirect the user to the desired page
             } else {
                 toast("Authentication failed");
@@ -91,20 +94,35 @@ const Auth = () => {
                             
                     )}
                     
-                        {!isLogin && <Input 
-                            padding={5}
-                            width={296}
-                            placeholder='Location' 
-                            fontSize={14} 
-                            value={inputs.location}
-                            onChange={(e) => setInputs({...inputs,location: e.target.value})} 
-                            />}
+                    {!isLogin && <Input 
+                        padding={5}
+                        width={296}
+                        placeholder='Location' 
+                        fontSize={14} 
+                        value={inputs.location}
+                        onChange={(e) => setInputs({...inputs,location: e.target.value})} 
+                        />}
                     
-                    
+                    {!isLogin && <div className="flex justify-around gap-20">
+                        <div onClick={()=>{
+                            if(inputs.type !== 'user'){
+                                setInputs({...inputs,type: 'user'})
+                            }
+                        }}>
+                            { inputs.type === 'user' ? "✅ " : "❌ " } User
+                        </div>    
+                        <div onClick={()=>{
+                            if(inputs.type !== 'organisation'){
+                                setInputs({...inputs,type: 'organisation'})
+                            }
+                        }}>
+                            { inputs.type === 'organisation' ? "✅ " : "❌ " } Organisation
+                        </div>
+                    </div>}
                     <Button w={"full"} colorScheme='green' size={"sm"} fontSize={14} onClick={handleAuth}>
                         {isLogin ? "Log-In" : "Sign Up"}
                     </Button>
-                    <Flex alignItems={"center"} justifyContent={"center"} my={4} gap={1} w={"full"}>
+                    {/* <Flex alignItems={"center"} justifyContent={"center"} my={4} gap={1} w={"full"}>
                         <Box flex={2} h={"1px"} bg={"gray.400"} />
                         <Text mx={1} color={"white"}>OR</Text>
                         <Box flex={2} h={"1px"} bg={"gray.400"} />
@@ -113,7 +131,7 @@ const Auth = () => {
                         <Text mx='2' color={"green.500"}>
                             Log in with Google
                         </Text>
-                    </Flex>
+                    </Flex> */}
                 </VStack>
             </Box>
             <Box border={"1px solid gray"} borderRadius={4} padding={5}>
