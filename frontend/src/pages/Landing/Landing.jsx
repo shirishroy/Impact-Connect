@@ -9,28 +9,28 @@ const Landing = () => {
     {
       title : "Getting started on ImpactConnect",
       description : "Join ImpactConnect to support social responsibility and sustainability projects. Easily browse and connect with project initiators to make a difference.",
-      image : "",
+      image : "https://images.pexels.com/photos/975771/pexels-photo-975771.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       btnText : "Discover More",
       btnlink: '/campaigns'
     },
     {
       title : "ImpactConnect and social impact",
       description : "ImpactConnect is a hub for sustainable projects. Our platform fosters transparency, collaboration, and positive change through innovative solutions.",
-      image : "",
+      image : "https://images.pexels.com/photos/9543414/pexels-photo-9543414.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
       btnText : "Join Impact-Connect",
       btnlink: '/auth'
     },
     {
       title : "Empower the social responsibility movement",
       description : "ImpactConnect enables individuals and organizations to revolutionize social responsibility efforts, creating a positive impact on communities worldwide.",
-      image : "",
+      image : "https://youngscholarz.com/wp-content/uploads/2021/10/education.jpeg",
       btnText : "Learn More",
       btnlink: '/campaigns'
     },
     {
       title : "Facilitating smarter and faster connections",
       description : "Discover how ImpactConnect's innovative technology streamlines connections and transactions, driving efficiency and impact in social responsibility projects.",
-      image : "",
+      image : "https://media.istockphoto.com/id/1226976682/vector/people-video-conference-on-laptop-computer-concept.jpg?s=2048x2048&w=is&k=20&c=0WW0TrtM500EZL9wgqp3qZWxIWP6wAzeAmCioPCQI7Y=",
       btnText : "Explore",
       btnlink: '/campaigns'
     }
@@ -46,7 +46,7 @@ const Landing = () => {
         data.map((item,index)=>{
           return (
             index % 2 === 0 ? (
-              <div key={index} className='flex justify-around items-center p-20 bg-lime-200'>
+              <div key={index} className='flex justify-around items-center p-20 gap-[50px] bg-lime-200'>
                 <div>
                   <img src={item.image} alt="plant img" className="w-80 h-80 rounded-md shadow-lg" />
                 </div>
