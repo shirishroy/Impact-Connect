@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { dataActions } from "../../store/data-slice";
 import { toast } from "react-toastify";
 
-const API_URL = 'http://localhost:3000';
+const API_URL = 'https://impactconnect-i5gi.onrender.com';
 
 const Auth = () => {
     const [isLogin, setIsLogin] = useState(true);
