@@ -83,7 +83,7 @@ export default function Chat() {
 
     return <>
         <Navbar />
-        <div>
+        <div className="flex w-screen">
             {
                 chats && chats?.map((chat, index) => {
                     let otherUser = null;

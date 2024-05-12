@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { dataActions } from "../../store/data-slice";
 import { toast } from "react-toastify";
 
-const API_URL = 'https://impactconnect-i5gi.onrender.com';
+const API_URL = 'http://localhost:3000';
 
 const Auth = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -41,6 +41,7 @@ const Auth = () => {
             });
             
             if (res.data.success) {
+                console.log(res.data);
                 localStorage.setItem('jwt',res.data.authToken);
                 toast.success("Welcome to Impact Connect");
                 dispatch(dataActions.setUser({ value : res.data.user }));

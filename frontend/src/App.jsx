@@ -21,7 +21,7 @@ function App() {
 
   const fetchChats = async()=>{
     try{
-      const res = await axios.post('https://impactconnect-i5gi.onrender.com/chat/getAll',{
+      const res = await axios.post('http://localhost:3000/chat/getAll',{
         userId : user?._id
       });
 
@@ -41,13 +41,33 @@ function App() {
 
   const getCampaigns = async ()=>{
     try{
-        const res = await axios.get('https://impactconnect-i5gi.onrender.com/campaign/getAll');
+        const res = await axios.get('http://localhost:3000/campaign/getAll');
         dispatch(dataActions.setCampaigns({campaigns : res.data.campaigns}));
         toast.success("Campaigns fetched successfully");
     }
     catch(err){
         console.log(err);
         toast.error("Failed to fetch campaigns");
+    }
+  }
+
+  const getUser = async (token)=>{
+    try{
+      const res = await axios.post('http://localhost:3000/api/getUser',{
+        token
+      });
+      if(res.data.success){
+        dispatch(dataActions.setUser({ value : res.data.user }));
+        toast.success("User fetched successfully");
+      }
+      else{
+        throw new Error(res.error);
+      }
+    }
+    catch(err){
+      console.log(err);
+      toast.error("Failed to fetch user");
+      localStorage.clear();
     }
   }
 
@@ -58,6 +78,11 @@ function App() {
   },[user]);
 
   useEffect(()=>{
+    const token = localStorage.getItem('jwt');
+    console.log(token);
+    if(localStorage.getItem('jwt')){
+      getUser(token);
+    }
     getCampaigns();
   },[]);
 

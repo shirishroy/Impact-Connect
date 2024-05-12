@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import { dataActions } from "@/store/data-slice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -61,11 +61,22 @@ const Navbar = () => {
                   Log-In | Sign-Up
                 </button>
               ) : (
-                <img
-                  src="https://images.pexels.com/photos/264905/pexels-photo-264905.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Avatar"
-                  className="w-8 h-8 rounded-full"
-                />
+                <div className="flex items-center">
+                  <div>
+                    <img
+                      src="https://images.pexels.com/photos/264905/pexels-photo-264905.jpeg?auto=compress&cs=tinysrgb&w=800"
+                      alt="Avatar"
+                      className="w-8 h-8 rounded-full"
+                    />
+                  </div>
+                  <div className="text-white hover:bg-lime-950 px-3 py-2 rounded-md" onClick={()=>{
+                    dispatch(dataActions.setUser({ value : null }));
+                    localStorage.clear();
+                    toast.success('Logged out successfully');
+                  }}>
+                    Logout
+                  </div>
+                </div>
               )}
             </a>
           </li>

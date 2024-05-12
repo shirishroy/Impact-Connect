@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 import { toast } from 'react-toastify';
 
-const API_URL = "https://impactconnect-i5gi.onrender.com";
+const API_URL = "http://localhost:3000";
 
 export let socket = io(API_URL,{
     reconnection : true,

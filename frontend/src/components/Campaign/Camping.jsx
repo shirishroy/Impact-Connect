@@ -17,7 +17,7 @@ const Camping = () => {
 
     const getCampaign = async()=>{
         try{
-            const res = await axios.get(`https://impactconnect-i5gi.onrender.com/campaign/get/${id}`);
+            const res = await axios.get(`http://localhost:3000/campaign/get/${id}`);
             setCampaign(res.data.campaign);
         }
         catch(err){
@@ -30,7 +30,7 @@ const Camping = () => {
 
     const createChat = async()=>{
         try{
-            const res = await axios.post('https://impactconnect-i5gi.onrender.com/chat/create',{
+            const res = await axios.post('http://localhost:3000/chat/create',{
                 userIds : [ user._id,campaign?.userId?._id ]
             });
             if(res.data.success){

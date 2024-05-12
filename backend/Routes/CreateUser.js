@@ -31,6 +31,7 @@ router.post("/createuser", [
       const authToken = jwt.sign({
         userId : newuser._id
       }, jwtSecret);
+
       res.cookie('jwt',authToken);
       res.json({ 
         success: true,
@@ -72,11 +73,30 @@ router.post("/createuser", [
 
       res.cookie('jwt',authToken);
       
-      return res.json({ success: true, user : userData }); // Return success response
+      return res.json({ 
+        success: true, 
+        user : userData,
+        authToken
+      }); // Return success response
     } catch (error) {
       console.log(error);
       res.json({ success: false , error});
     }
   });
+
+  router.post('/getUser',async(req,res)=>{
+    const { token } = req.body;
+    const userId = jwt.decode(token,jwtSecret).userId;
+    try{
+      const new_user = await user.find({ _id: userId });
+      res.json({ success : true , 
+        user : new_user 
+      });
+    }
+    catch(e){
+      console.log(e);
+      res.json({ success : false , error : e });
+    }
+  })
   
   module.exports = router;
