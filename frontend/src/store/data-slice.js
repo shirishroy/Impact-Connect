@@ -80,6 +80,20 @@ const dataSlice = createSlice({
                 currentChat : newCurrentChat
             }
             return newState;
+        },
+        updateCampaign(state, action){
+            const { campaign } = action.payload;
+            const newCampaigns = state.campaigns.map(camp => {
+                if (camp._id === campaign._id) {
+                    return campaign;
+                }
+                return camp;
+            });
+            const newState = {
+                ...state,
+                campaigns : newCampaigns
+            }
+            return newState;
         }
     }
 });

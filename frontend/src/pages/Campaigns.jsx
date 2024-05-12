@@ -14,7 +14,7 @@ export default function Campaigns(){
         try{
             const res = await axios.get('http://localhost:3000/campaign/getAll');
             dispatch(dataActions.setCampaigns({campaigns : res.data.campaigns}));
-            toast.success("Campaigns fetched successfully");
+            // toast.success("Campaigns fetched successfully");
         }
         catch(err){
             console.log(err);

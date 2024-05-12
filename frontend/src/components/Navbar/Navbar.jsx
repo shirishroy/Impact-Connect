@@ -50,10 +50,10 @@ const Navbar = () => {
             </button>
           </li>
           <li>
-            <a href="#" className="flex items-center text-white hover:bg-lime-950 px-3 py-2 rounded-md">
+            <div className="flex items-center text-white py-2 rounded-md">
               {user === null ? (
                 <button 
-                className="text-white font-bold rounded"
+                className="text-white font-bold rounded-md hover:bg-lime-950 px-3 py-2"
                 onClick={()=>{
                   navigate('/auth');
                 }}
@@ -62,23 +62,26 @@ const Navbar = () => {
                 </button>
               ) : (
                 <div className="flex items-center">
-                  <div>
+                  <div className="flex items-center rounded-md hover:bg-lime-950 px-3 py-2 gap-[5px]" onClick={()=>{
+                    navigate('/my-campaigns');
+                  }}>
                     <img
                       src="https://images.pexels.com/photos/264905/pexels-photo-264905.jpeg?auto=compress&cs=tinysrgb&w=800"
                       alt="Avatar"
                       className="w-8 h-8 rounded-full"
                     />
+                    <div>{user?.name}</div>
                   </div>
-                  <div className="text-white hover:bg-lime-950 px-3 py-2 rounded-md" onClick={()=>{
+                  <div className="text-white hover:bg-lime-950 px-3 py-2 rounded-md rounded-md hover:bg-lime-950 px-3 py-2" onClick={()=>{
                     dispatch(dataActions.setUser({ value : null }));
                     localStorage.clear();
                     toast.success('Logged out successfully');
                   }}>
-                    Logout
+                    🪫 Logout
                   </div>
                 </div>
               )}
-            </a>
+            </div>
           </li>
         </ul>
       </div>

@@ -12,6 +12,7 @@ import Campaigns from './pages/Campaigns';
 import { useEffect } from 'react';
 import { dataActions } from './store/data-slice';
 import axios from 'axios';
+import MyCampaigns from './pages/MyCampaigns';
 
 function App() {
   // sample comment
@@ -28,7 +29,7 @@ function App() {
       if(res.data.success){
         // console.log(res.data.chats);
         dispatch(dataActions.setChats({ chats : res.data.chats }));
-        toast.success("Chats fetched successfully");
+        // toast.success("Chats fetched successfully");
       }
       else{
         throw new Error(res.error);
@@ -43,7 +44,7 @@ function App() {
     try{
         const res = await axios.get('http://localhost:3000/campaign/getAll');
         dispatch(dataActions.setCampaigns({campaigns : res.data.campaigns}));
-        toast.success("Campaigns fetched successfully");
+        // toast.success("Campaigns fetched successfully");
     }
     catch(err){
         console.log(err);
@@ -57,8 +58,8 @@ function App() {
         token
       });
       if(res.data.success){
-        dispatch(dataActions.setUser({ value : res.data.user }));
-        toast.success("User fetched successfully");
+        dispatch(dataActions.setUser({ value : res.data.user[0] }));
+        // toast.success("User fetched successfully");
       }
       else{
         throw new Error(res.error);
@@ -96,6 +97,7 @@ function App() {
             <Route path='/create-campaign' element={<CreateCampaign />} />
             <Route path='/campaign/:id' element={<Camping />} />
             <Route path="/campaigns" element={<Campaigns />} />
+            <Route path="/my-campaigns" element={<MyCampaigns />} />
           </Routes>
         </BrowserRouter>
         <ToastContainer 

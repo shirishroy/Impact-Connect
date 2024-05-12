@@ -7,8 +7,8 @@ async function saveMessageToDb(data){
     await dbConnect();
 
     try{
-        const chat = await Chat.findOne({
-            userIds : [ senderId, to ]
+        let chat = await Chat.findOne({
+            userIds : { $all : [senderId, to] }
         });
         if(!chat){
             throw new Error('Chat not found');

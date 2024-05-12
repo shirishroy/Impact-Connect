@@ -1,7 +1,23 @@
 import Navbar from '@/components/Navbar/Navbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 export default function CreateCampaign() {
+
+  const user = useSelector(state=>state.data.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    if(!user){
+      navigate('/');
+      toast.warn("Please Login to continue");
+    }
+  },[]);
+  
+
   // State variables to store form data
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');

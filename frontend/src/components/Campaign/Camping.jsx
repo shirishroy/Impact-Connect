@@ -52,6 +52,11 @@ const Camping = () => {
     }
 
     useEffect(()=>{
+        console.log(campaign);
+        console.log(user);
+    },[user,campaign]);
+
+    useEffect(()=>{
         if(!campaigns){
             getCampaign();
         }
@@ -94,6 +99,51 @@ const Camping = () => {
     //     volunteer : []
     // }
 
+    const addVolunteer = async()=>{
+        try{
+            toast.info("Volunteering...")
+            const res = await axios.post('http://localhost:3000/campaign/volunteer',{
+                campaignId : campaign._id,
+                userId : user._id
+            });
+            if(res.data.success){
+                setCampaign(res.data.campaign);
+                dispatch(dataActions.updateCampaign({ campaign : res.data.campaign }));
+                toast.success('Volunteered');
+            }
+            else{
+                throw new Error(res.data.error);
+            }
+        }
+        catch(err){
+            console.log(err);
+            toast.error('Something went Wrong');
+        }
+    }
+
+    const addDonor = async()=>{
+        try{
+            toast.info("Donating...")
+            toast.info('Payment Gateway Integration Pending');
+            const res = await axios.post('http://localhost:3000/campaign/donate',{
+                campaignId : campaign._id,
+                userId : user._id
+            });
+            if(res.data.success){
+                setCampaign(res.data.campaign);
+                dispatch(dataActions.updateCampaign({ campaign : res.data.campaign }));
+                toast.success('Donated - Virtually');
+            }
+            else{
+                throw new Error(res.data.error);
+            }
+        }
+        catch(err){
+            console.log(err);
+            toast.error('Something went Wrong');
+        }
+    }
+
     return (campaign && <>
         <Navbar />
         <div className="bg-green-50 min-h-screen py-10">
@@ -104,22 +154,44 @@ const Camping = () => {
                         <img src={campaign?.image} className="w-[700px] h-[700px] rounded-md shadow-lg" alt="Campaign Image" />
                         <div>
                             <div className="text-4xl font-semibold text-green-900 mb-4">{campaign?.title}</div>
+                            <div className='flex py-3 mb-2 justify-around'>
+                                <div className='text-green-900'>
+                                    {campaign?.type}
+                                </div>
+                                <div className='text-green-900'>
+                                📍 {campaign?.location}
+                                </div>
+                                <div className='text-green-900'>
+                                🏢 {campaign?.userId?.name}
+                                </div>
+                            </div>
                             <div className="text-lg text-green-800 mb-4">{campaign?.description}</div>
-                            <div className="text-lg text-green-800 mb-4">
+                            <div className="text-lg text-green-800 mb-4 flex gap-[50px]">
                                 <ul>
-                                    <div>
-                                        Requirements - 
+                                    <div className='font-semibold'>
+                                        Requirements
                                     </div>
                                     {campaign?.requirements.map((requirement, index) => (
-                                        <li key={index} className="flex items-center gap-3">
+                                        <li key={index} className="flex items-center gap-10">
                                             <div className="text-green-700">{requirement.type}</div>
-                                            <div>{requirement.required}</div>
+                                            <div>{ requirement.type === 'Money' ? "₹" : ""}{requirement.required}</div>
+                                        </li>
+                                    ))}
+                                </ul>
+                                <ul>
+                                    <div className='font-semibold'>
+                                        Fulfilled
+                                    </div>
+                                    {campaign?.requirements.map((requirement, index) => (
+                                        <li key={index} className="flex items-center gap-10">
+                                            <div className="text-green-700">{requirement.type}</div>
+                                            <div>{ requirement.type === 'Money' ? "₹" : ""}{requirement.fulfilled ? requirement.fulfilled : 0}</div>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                             <div className="space-x-4">
-                                <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded"
+                                <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 w-48 rounded"
                                 onClick={async ()=>{
                                     if(user){
                                         await createChat();
@@ -134,13 +206,67 @@ const Camping = () => {
                                 >
                                     Chat
                                 </button>
-                                <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+                                <button 
+                                className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 w-48 rounded"
+                                onClick={async ()=>{
+                                    if(!user){
+                                        toast.error('Login to Donate...')
+                                        toast.info('Redirecting to Login...')
+                                        navigate('/auth')
+                                        return;
+                                    }
+                                    if(campaign.donors.find(donor=>donor.userId._id === user._id)){
+                                        toast.error('Already Donated');
+                                        return;
+                                    }
+                                    await addDonor();
+                                }}
+                                >
                                     Donate
                                 </button>
-                                <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded">
+                                <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 w-48 rounded"
+                                onClick={async ()=>{
+                                    if(!user){
+                                        toast.error('Login to Volunteer...')
+                                        toast.info('Redirecting to Login...')
+                                        navigate('/auth')
+                                        return;
+                                    }
+                                    if(campaign.volunteers.find(volunteer=>volunteer.userId._id === user._id)){
+                                        toast.error('Already Volunteered');
+                                        return;
+                                    }
+                                    await addVolunteer();
+                                }}
+                                >
                                     Volunteer
                                 </button>
                             </div>
+                            <div className='flex text-green-800 gap-[100px] align-top'>
+                                {campaign && campaign?.volunteers.length>0 && <div className='py-4'>
+                                    <div className='text-lg font-semibold ' >Volunteers</div>
+                                    {
+                                        campaign?.volunteers.map((volunteer,index)=>{
+                                            return <div key={index} className="flex items-center gap-4">
+                                                <div>👤 {volunteer?.userId?.name}</div> 
+                                                <div>{volunteer?.position}</div>
+                                            </div>
+                                        })
+                                    }
+                                </div>}
+                                {campaign && campaign?.donors.length>0 && <div className='py-4'>
+                                    <div className='text-lg font-semibold ' >Donors</div>
+                                    {
+                                        campaign?.donors.map((donor,index)=>{
+                                            return <div key={index} className="flex items-center gap-4">
+                                                <div>👤 {donor?.userId?.name}</div> 
+                                                <div>₹500</div>
+                                            </div>
+                                        })
+                                    }
+                                </div>}
+                            </div>
+
                         </div>
                     </div>
                 </div>

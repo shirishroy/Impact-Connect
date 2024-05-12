@@ -61,7 +61,8 @@ export default function Chat() {
                 dispatch(dataActions.addMessage({ message : {
                     senderId : data.senderId,
                     message : data.message
-                } , chatId : data.chatId}));
+                } , chatId : data.chatId
+            }));
             });
             socket.on('new-chat',(data)=>{
 
@@ -83,7 +84,8 @@ export default function Chat() {
 
     return <>
         <Navbar />
-        <div className="flex w-screen">
+        <div className="flex w-full justify-center font-sans">
+            <div>
             {
                 chats && chats?.map((chat, index) => {
                     let otherUser = null;
@@ -94,48 +96,63 @@ export default function Chat() {
                         otherUser = chat.userIds[0];
                     }
                     // console.log(otherUser)
-                    return <div key={index} className="p-4 border-b-2 cursor-pointer" onClick={()=>{
+                    return <div key={index} className="p-4 border-b-2 cursor-pointer w-[350px] text-center" onClick={()=>{
                         dispatch(dataActions.setCurrentChat({ chat }));
                     }}>
                         {otherUser?.name} {chat._id === currentChat?._id ? "🗨" : ""}
                     </div>
                 })
             }
+            </div>
             {
                 currentChat && <div>
-                    <div>{currentChatSender}</div>
+                    <div
+                    className="w-[750px] text-xl flex justify-center p-5 font-semibold"
+                    >{currentChatSender}</div>
                     <div>
                         {                        
                             currentChat?.messages?.map((message,index)=>{
                                 
                                 if(message.senderId === user._id){
 
-                                    return <div className="text-right" key={index}>
-                                            <div>You</div>
-                                            <div className="text-right">{message.message}</div>
+                                    return <div className="text-right p-2" key={index}>
+                                            <div className="text-xs text-slate-300 m-0 p-0">You</div>
+                                            <div className="text-lg m-0 p-0">{message.message}</div>
                                         </div>
                                 }
                                 else{
-                                    return <div className="text-left" key={index}>
-                                        <div>{currentChatSender}</div>
-                                        <div className="text-left">{message.message}</div>
-                                    </div>
+                                    return <div className="text-left p-2" key={index}>
+                                    <div className="text-xs text-slate-300 m-0 p-0">{currentChatSender}</div>
+                                    <div className="text-lg m-0 p-0">{message.message}</div>
+                                </div>
                                 }
                             })
                         }
                     </div>
-                    <input type="text" placeholder="Type a message" value={msg} 
-                    onChange={(e)=>{
-                        setMsg(e.target.value);
-                    }}
-                    onKeyDown={(e)=>{
-                        if(e.key === 'Enter'){
-                            e.preventDefault();
-                            sendMessage(e.target.value);
+                    <div className="flex">
+                        <input 
+                        type="text" 
+                        placeholder="Type a message" 
+                        value={msg} 
+                        onChange={(e)=>{
+                            setMsg(e.target.value);
+                        }}
+                        onKeyDown={(e)=>{
+                            if(e.key === 'Enter'){
+                                e.preventDefault();
+                                sendMessage(e.target.value);
+                                setMsg('');
+                            }
+                        }} 
+                        className="p-4 w-full"
+                        />
+                        <button 
+                        className="p-4"
+                        onClick={()=>{
+                            sendMessage(msg);
                             setMsg('');
-                        }
-                    }} 
-                    />
+                        }}>🎯</button>
+                    </div>
                 </div>
             }
         </div>

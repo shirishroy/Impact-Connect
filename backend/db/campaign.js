@@ -11,6 +11,30 @@ const requirementSchema = new mongoose.Schema({
     }
 });
 
+const volunteerSchema = new mongoose.Schema({
+    "userId" : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'user'
+    },
+    "position" : String
+});
+
+const donationSchema = new mongoose.Schema({
+    "type" : {
+        type : String,
+        required : true
+    },
+    "amount" : Number
+});
+
+const donorSchema = new mongoose.Schema({
+    "userId" : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'user'
+    },
+    "donation" : [donationSchema]
+});
+
 const CampaignSchema = new mongoose.Schema({
     userId : {
         type : mongoose.Schema.Types.ObjectId,
@@ -57,32 +81,11 @@ const CampaignSchema = new mongoose.Schema({
         required : false
     },
     donors : {
-        type : [
-            {
-                "userId" : {
-                    type : mongoose.Schema.Types.ObjectId,
-                    ref : 'user'
-                },
-                "donation" : [
-                    {
-                        "type" : String,
-                        "amount" : Number
-                    }
-                ]
-            }
-        ],
+        type : [donorSchema],
         default : []
     },
     volunteers : {
-        type : [
-            {
-                "userId" : {
-                    type : mongoose.Schema.Types.ObjectId,
-                    ref : 'user'
-                },
-                "position" : String
-            }
-        ],
+        type : [volunteerSchema],
         default : []
     }
 });

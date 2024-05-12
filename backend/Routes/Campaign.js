@@ -80,45 +80,39 @@ router.post("/create", async (req, res) => {
 });
 
 router.post('/donate', async(req,res)=>{
-    const { type , campaignId , userId , donation } = req.body;
+    const { campaignId , userId } = req.body;
     try{
         const campaign = await Campaign.findById(campaignId);
-        
-        if(type === 'money'){
-            campaign.donors.push({
-                userId,
-                donation : {
-                    type : "Money",
-                    amount : donation
-                }
-            });
-            const requirements = campaign.requirements;
-            requirements.forEach(req => {
-                if(req.type === 'Money'){
-                    req.fulfilled += donation;
-                }
-            });
-        }
-        else{
-            campaign.donors.push({
-                userId,
-                donation : {
-                    type,
-                    amount : donation
-                }
-            });
-            const requirements = campaign.requirements;
-            requirements.forEach(req => {
-                if(req.type === type){
-                    req.fulfilled += donation;
-                }
-            });
-        }
-        const newCampaign = await campaign.save();
+        campaign.donors.push({
+            userId,
+            donation : {
+                type : "Money",
+                amount : 500
+            }
+        });
+        // const newRequirements = campaign.requirements.forEach(req => {
+        //     if(req.type === 'Money'){
+        //         req.fulfilled += 500;
+        //     }
+        //     return req;
+        // });
+        // campaign.requirements = newRequirements;        
+        await campaign.save();
+
+        const populatedCampaign = await Campaign.find({ _id : campaignId }).populate({
+            path : 'userId',
+            select : 'name email image'
+        }).populate({
+            path : 'donors.userId',
+            select : 'name email image'
+        }).populate({
+            path : 'volunteers.userId',
+            select : 'name email image'
+        });
 
         res.status(200).json({ 
             success : true,
-            campaign : newCampaign
+            campaign : populatedCampaign[0]
         });
     }
     catch(error){
@@ -127,18 +121,42 @@ router.post('/donate', async(req,res)=>{
     }
 });
 
-router.post('volunteer', async(req,res)=>{
-    const { campaignId , userId, position } = req.body;
+router.post('/volunteer', async(req,res)=>{
+    const { campaignId , userId } = req.body;
+    // console.log(req.body);
     try{
         const campaign = await Campaign.findById(campaignId);
+        let position = 'Volunteer'
+        const newRequirements = campaign.requirements.map(requirement => {
+            if (requirement.type.includes('Volunteer')) {
+                requirement.fulfilled += 1;
+                return requirement;
+            }
+            return requirement;
+        });
         campaign.volunteers.push({
             userId,
             position
         });
-        const newCampaign = await campaign.save();
+        campaign.requirements = newRequirements;
+
+        await campaign.save();
+        // console.log(newCampaign);
+
+        const populatedCampaign = await Campaign.find({ _id : campaignId }).populate({
+            path : 'userId',
+            select : 'name email image'
+        }).populate({
+            path : 'donors.userId',
+            select : 'name email image'
+        }).populate({
+            path : 'volunteers.userId',
+            select : 'name email image'
+        });
+
         res.status(200).json({ 
             success : true,
-            campaign : newCampaign
+            campaign : populatedCampaign[0]
         });
     }
     catch(error){
