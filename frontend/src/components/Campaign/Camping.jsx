@@ -17,7 +17,7 @@ const Camping = () => {
 
     const getCampaign = async()=>{
         try{
-            const res = await axios.get(`http://localhost:3000/campaign/get/${id}`);
+            const res = await axios.get(`https://impactconnect-i5gi.onrender.com/campaign/get/${id}`);
             setCampaign(res.data.campaign);
         }
         catch(err){
@@ -30,7 +30,7 @@ const Camping = () => {
 
     const createChat = async()=>{
         try{
-            const res = await axios.post('http://localhost:3000/chat/create',{
+            const res = await axios.post('https://impactconnect-i5gi.onrender.com/chat/create',{
                 userIds : [ user._id,campaign?.userId?._id ]
             });
             if(res.data.success){
@@ -102,7 +102,7 @@ const Camping = () => {
     const addVolunteer = async()=>{
         try{
             toast.info("Volunteering...")
-            const res = await axios.post('http://localhost:3000/campaign/volunteer',{
+            const res = await axios.post('https://impactconnect-i5gi.onrender.com/campaign/volunteer',{
                 campaignId : campaign._id,
                 userId : user._id
             });
@@ -125,7 +125,7 @@ const Camping = () => {
         try{
             toast.info("Donating...")
             toast.info('Payment Gateway Integration Pending');
-            const res = await axios.post('http://localhost:3000/campaign/donate',{
+            const res = await axios.post('https://impactconnect-i5gi.onrender.com/campaign/donate',{
                 campaignId : campaign._id,
                 userId : user._id
             });

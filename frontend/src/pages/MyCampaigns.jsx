@@ -28,9 +28,7 @@ export default function MyCampaigns(){
     useEffect(()=>{
         console.log(myCampaigns);
     },[myCampaigns])
-
-    
-
+  
     return(
         <>
             <Navbar />
