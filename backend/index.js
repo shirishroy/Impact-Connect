@@ -27,9 +27,9 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  const token = socket.handshake.query.token;
-  console.log('Connected: ', token);
-  socket_store[token] = socket;
+  const userId = socket.handshake.query.userId;
+  console.log('Connected: ', userId);
+  socket_store[userId] = socket.id;
 
   socket.on('message', (data)=>{
     console.log('Message: ', data.message);
@@ -38,8 +38,8 @@ io.on('connection', (socket) => {
   });
 
   socket.on('disconnect', () => {
-    console.log('Disconnected: ', token);
-    delete socket_store[token];
+    console.log('Disconnected: ', userId);
+    delete socket_store[userId];
   });
 });
 

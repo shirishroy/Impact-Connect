@@ -1,9 +1,20 @@
 const mongoose = require('mongoose');
 
+const requirementSchema = new mongoose.Schema({
+    type : {
+        type : String,
+        required : true
+    },
+    required : {
+        type : Number,
+        required : true
+    }
+});
+
 const CampaignSchema = new mongoose.Schema({
     userId : {
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'User',
+        ref : 'user',
         required : true
     },
     title : {
@@ -16,19 +27,10 @@ const CampaignSchema = new mongoose.Schema({
     },
     image : {
         type : String,
+        default : ""
     },
     requirements : {
-        type : [
-            {
-                "type" : String,
-                "required" : Number,
-                "fulfilled" : {
-                    type : Number,
-                    default : 0
-                },
-                // "description" : String
-            }
-        ],
+        type : [requirementSchema],
         required : true
     },
     type : {
@@ -37,9 +39,10 @@ const CampaignSchema = new mongoose.Schema({
     },
     video : {
         type : String,
+        default : ""
     },
     location : {
-        type : [String],
+        type : String,
         required : true
     },
     brochure : {
@@ -47,18 +50,18 @@ const CampaignSchema = new mongoose.Schema({
     },
     startDate : {
         type : Date,
-        required : true
+        default : Date.now
     },
     endDate : {
         type : Date,
-        required : true
+        required : false
     },
     donors : {
         type : [
             {
                 "userId" : {
                     type : mongoose.Schema.Types.ObjectId,
-                    ref : 'User'
+                    ref : 'user'
                 },
                 "donation" : [
                     {
@@ -75,7 +78,7 @@ const CampaignSchema = new mongoose.Schema({
             {
                 "userId" : {
                     type : mongoose.Schema.Types.ObjectId,
-                    ref : 'User'
+                    ref : 'user'
                 },
                 "position" : String
             }

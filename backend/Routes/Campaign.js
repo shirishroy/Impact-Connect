@@ -2,17 +2,17 @@ const router = require("express").Router();
 const Campaign = require("../db/campaign");
 const { uploadImage } = require("../Utils");
 
-router.get('/all', async(req,res)=>{
+router.get('/getall', async(req,res)=>{
     try{
         const campaigns = await Campaign.find({}).populate({
             path : 'userId',
-            select : 'name email'
+            select : 'name email image'
         }).populate({
             path : 'donors.userId',
-            select : 'name email'
+            select : 'name email image'
         }).populate({
             path : 'volunteers.userId',
-            select : 'name email'
+            select : 'name email image'
         });
         
         res.status(200).json({ 
@@ -26,8 +26,33 @@ router.get('/all', async(req,res)=>{
     }
 });
 
+router.get('/get/:id', async(req,res)=>{
+    const id = req.params.id;
+    try{
+        const campaign = await Campaign.findById(id).populate({
+            path : 'userId',
+            select : 'name email image'
+        }).populate({
+            path : 'donors.userId',
+            select : 'name email image'
+        }).populate({
+            path : 'volunteers.userId',
+            select : 'name email image'
+        });
+        
+        res.status(200).json({ 
+            success : true,
+            campaign
+        });
+    }
+    catch(error){
+        console.log(error);
+        res.status(400).json({ success : false, error });
+    }
+});
+
 router.post("/create", async (req, res) => {
-    const { title, description, userId, image, video, brochure, startDate, location, endDate, requirements, type } = req.body;
+    const { title, description, userId, image, video, brochure, location, requirements, type } = req.body;
     const imageLink = await uploadImage(image);
 
     try {
@@ -38,9 +63,7 @@ router.post("/create", async (req, res) => {
             image : imageLink,
             video,
             brochure,
-            startDate,
             location,
-            endDate,
             requirements,
             type
         });
