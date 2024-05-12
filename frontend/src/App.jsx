@@ -1,41 +1,89 @@
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Landing from './pages/Landing/Landing';
-import store from './store';
 import Auth from './pages/Auth'
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Chat from './pages/Chat';
 import CreateCampaign from './pages/CreateCampaign';
 import Camping from './components/Campaign/Camping';
 import Campaigns from './pages/Campaigns';
+import { useEffect } from 'react';
+import { dataActions } from './store/data-slice';
+import axios from 'axios';
 
 function App() {
   // sample comment
+  const dispatch = useDispatch();
+  const chats = useSelector(state=>state.data.chats);
+  const user = useSelector(state=>state.data.user);
+
+  const fetchChats = async()=>{
+    try{
+      const res = await axios.post('http://localhost:3000/chat/getAll',{
+        userId : user?._id
+      });
+
+      if(res.data.success){
+        // console.log(res.data.chats);
+        dispatch(dataActions.setChats({ chats : res.data.chats }));
+        toast.success("Chats fetched successfully");
+      }
+      else{
+        throw new Error(res.error);
+      }
+    }
+    catch(error){
+      toast.error(error);
+    }
+  }
+
+  const getCampaigns = async ()=>{
+    try{
+        const res = await axios.get('http://localhost:3000/campaign/getAll');
+        dispatch(dataActions.setCampaigns({campaigns : res.data.campaigns}));
+        toast.success("Campaigns fetched successfully");
+    }
+    catch(err){
+        console.log(err);
+        toast.error("Failed to fetch campaigns");
+    }
+  }
+
+  useEffect(()=>{
+    if(!chats && user){
+      fetchChats();
+    }
+  },[user]);
+
+  useEffect(()=>{
+    getCampaigns();
+  },[]);
+
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path='/create-campaign' element={<CreateCampaign />} />
-          <Route path='/campaign' element={<Camping />} />
-          <Route path="/campaigns" element={<Campaigns />} />
-        </Routes>
-      </BrowserRouter>
-      <ToastContainer 
-        position='bottom-right'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        theme='light'
-        rtl={false}
-        // transition='bounce'
-      />
-    </Provider>
+      <>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Landing />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path='/create-campaign' element={<CreateCampaign />} />
+            <Route path='/campaign/:id' element={<Camping />} />
+            <Route path="/campaigns" element={<Campaigns />} />
+          </Routes>
+        </BrowserRouter>
+        <ToastContainer 
+          position='bottom-right'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          theme='light'
+          rtl={false}
+          // transition='bounce'
+        />
+      </>
   )
 }
 

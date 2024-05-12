@@ -1,4 +1,4 @@
-import { VStack, Box, Button, Input, Flex ,Text} from "@chakra-ui/react";
+import { VStack, Box, Button, Input, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 const API_URL = "http://localhost:3000";
 
-const socket = io(API_URL,{
+export let socket = io(API_URL,{
     reconnection : true,
     reconnectionDelay : 2000,
     autoConnect : false,
@@ -11,22 +11,30 @@ const socket = io(API_URL,{
 });
 
 export async function connectSocket(userId){
-    socket.connect({
-        query : {
-            userId
-        }
-    });
-    toast.success('Socket Connected');
+    if(userId){
+        // console.log(userId);
+        socket = io(API_URL,{
+            reconnection : true,
+            reconnectionDelay : 2000,
+            autoConnect : true,
+            reconnectionAttempts : 10,
+            query : {
+                userId
+            }
+        });
+        toast.success('Socket Connected');
+    }
 }
 
-export async function getSocket(userId){
-    await connectSocket(userId);
+export async function getSocket(){
     return socket;
 }
 
 export function disconnectSocket(){
-    socket.disconnect();
-    toast.warn('Socket Disconnected');
+    if(socket.connected){
+        socket.disconnect();
+        toast.warn('Socket Disconnected');
+    }
 }
 
 export function sendMessage(data){
