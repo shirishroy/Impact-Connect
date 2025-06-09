@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Campaign = require("../db/campaign");
+const Campaign = require("../models/campaign");
 const { uploadImage } = require("../Utils");
 
 router.get('/getall', async(req,res)=>{

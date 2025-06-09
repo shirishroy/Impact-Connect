@@ -17,7 +17,7 @@ const Camping = () => {
 
     const getCampaign = async()=>{
         try{
-            const res = await axios.get(`https://impactconnect-i5gi.onrender.com/campaign/get/${id}`);
+            const res = await axios.get(`http://localhost:3000/campaign/getall`);
             setCampaign(res.data.campaign);
         }
         catch(err){
@@ -30,7 +30,7 @@ const Camping = () => {
 
     const createChat = async()=>{
         try{
-            const res = await axios.post('https://impactconnect-i5gi.onrender.com/chat/create',{
+            const res = await axios.post('http://localhost:3000/chat/create',{
                 userIds : [ user._id,campaign?.userId?._id ]
             });
             if(res.data.success){
@@ -102,7 +102,7 @@ const Camping = () => {
     const addVolunteer = async()=>{
         try{
             toast.info("Volunteering...")
-            const res = await axios.post('https://impactconnect-i5gi.onrender.com/campaign/volunteer',{
+            const res = await axios.post('http://localhost:3000/campaign/volunteer',{
                 campaignId : campaign._id,
                 userId : user._id
             });
@@ -125,7 +125,7 @@ const Camping = () => {
         try{
             toast.info("Donating...")
             toast.info('Payment Gateway Integration Pending');
-            const res = await axios.post('https://impactconnect-i5gi.onrender.com/campaign/donate',{
+            const res = await axios.post('http://localhost:3000/campaign/donate',{
                 campaignId : campaign._id,
                 userId : user._id
             });
@@ -151,7 +151,7 @@ const Camping = () => {
             <div className="mx-56">
                 <div className="flex justify-around p-5">
                     <div className="flex items-center gap-[50px]">
-                        <img src={campaign?.image} className="w-[700px] h-[700px] rounded-md shadow-lg" alt="Campaign Image" />
+                        <img src={campaign?.image} className="w-[700px] h-[700px] rounded-md shadow-lg" alt="Campaignnnn Image" />
                         <div>
                             <div className="text-4xl font-semibold text-green-900 mb-4">{campaign?.title}</div>
                             <div className='flex py-3 mb-2 justify-around'>

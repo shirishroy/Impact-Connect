@@ -5,33 +5,7 @@ export default function Card({campaign}){
 
     const navigate = useNavigate();
 
-    // const campaign = {
-    //     title : "Wedding Food Collection for Orphanages",
-    //     description : "loremipsum11000",
-    //     image : "https://images.pexels.com/photos/23221538/pexels-photo-23221538/free-photo-of-a-white-flower-with-green-leaves-in-the-dark.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load",
-    //     requirements : [
-    //         {
-    //             type : "Money",
-    //             amount : 8000,
-    //         },
-    //         {
-    //             type : "Volunteer",
-    //             amount : 5
-    //         },
-    //     ],
-    //     type : "Food Security",
-    //     video : "",
-    //     brochure : "",
-    //     startDate : "",
-    //     userId : {
-    //         _id : "",
-    //         name : "Shirish Roy",
-    //         email : "gmail@gmail.com"
-    //     },
-    //     location : "Bangalore",
-    //     donors : [],
-    //     volunteer : []
-    // }
+    
 
     return (
         campaign && <div className="w-min justify-center font-sans m-4 p-4 cursor-pointer bg-lime-300 rounded-md" onClick={()=>{

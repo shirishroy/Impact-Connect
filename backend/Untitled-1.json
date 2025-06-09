@@ -1,170 +1,47 @@
 {
-    "title": "Wedding food collection.",
-    "description": "As a food collection organization specializing in gathering surplus wedding food for orphanages, our mission is twofold: to reduce food waste and to support vulnerable communities. With a dedicated team and a network of partner vendors, we work tirelessly to collect, package, and distribute excess wedding meals to orphanages and shelters in need. By repurposing perfectly good food that would otherwise go to waste, we not only provide nourishment to those facing food insecurity but also contribute to a more sustainable and compassionate society. Our commitment to social responsibility drives us to make a meaningful impact by ensuring that every meal finds its way to those who need it most, bringing hope and nourishment to those less fortunate.",
-    "image":"https://englishtribuneimages.blob.core.windows.net/gallary-content/2020/4/2020_4$largeimg_1467786114.JPG",
-    "requirements" : [{
-        "type" : "Money",
-        "required": 20000
+    "project1": {
+        "title": "Wedding food collection.",
+        "description": "As a food collection organization specializing in gathering surplus wedding food for orphanages, our mission is twofold: to reduce food waste and to support vulnerable communities.",
+        "image": "https://englishtribuneimages.blob.core.windows.net/gallary-content/2020/4/2020_4$largeimg_1467786114.JPG",
+        "requirements": {
+            "Money": 20000,
+            "Volunteer": 5
+        },
+        "type": "Food Security",
+        "startDate": "15/06/2017",
+        "userId": "663fc8e719e222cfc329bfbd",
+        "location": "Bangalore",
+        "donors": [], 
+        "volunteers": []
     },
-    {
-        "type" : "Volunteer",
-        "required": 5
-    }],
-    "type": "Food Security",
-    "startDate": "15/06/2017",
-    "userId":"663fc8e719e222cfc329bfbd",
-    "location": "Bangalore",
-    "donors":[],
-    "volunteers": []
-}
-
-{
-    "title": "Education for all",
-    "description": "As an educational initiative dedicated to empowering underserved communities, our organization is committed to bridging the gap in access to quality education. Through innovative programs and partnerships with local schools and community centers, we provide comprehensive learning opportunities to individuals who may otherwise lack access to educational resources. Our tailored approach addresses diverse learning needs, offering everything from basic literacy and numeracy skills to advanced vocational training. By fostering a culture of lifelong learning and skill development, we aim to uplift individuals and communities, equipping them with the knowledge and tools they need to thrive in an ever-changing world. Our impact extends far beyond the classroom, as we believe that education is the key to unlocking a brighter future for all.",
-    "image":"https://ngobox.org/news/NGO%20Education.jpg",
-    "requirements":[{
-        "type" : "Money",
-        "required": 10000
+    "project2": {
+        "title": "Education for all",
+        "description": "As an educational initiative dedicated to empowering underserved communities, our organization is committed to bridging the gap in access to quality education.",
+        "image": "https://ngobox.org/news/NGO%20Education.jpg",
+        "requirements": {
+            "Money": 10000,
+            "Teaching Volunteers": 3
+        },
+        "type": "Education",
+        "startDate": "15/04/2019",
+        "userId": "663fca0e19e222cfc329bfc0",
+        "location": "Chennai",
+        "donors": [],
+        "volunteers": []
     },
-    {
-        "type" : "Teaching Volunteers",
-        "required": 3
-    }],
-    "type": "Education",
-    "startDate": "15/04/2019",
-    "userId":"663fca0e19e222cfc329bfc0",
-    "location": "Chennai",
-    "donors":[],
-    "volunteers": []
-
-}
-
-
-
-{
-    "title": "Education a right",
-    "description": "Our organization is dedicated to empowering marginalized communities by ensuring equal access to high-quality learning experiences. Through innovative initiatives and strategic partnerships with local schools and community centers, we deliver a wide range of educational opportunities tailored to meet the unique needs of learners from diverse backgrounds. From foundational literacy and numeracy programs to advanced vocational training, our comprehensive approach nurtures lifelong learning and skill development. By cultivating a supportive environment that fosters growth and resilience, we strive to uplift individuals and communities, arming them with the knowledge and skills necessary to navigate and succeed in today's dynamic world. Our commitment to education extends beyond the confines of traditional classrooms, as we firmly believe that education serves as the cornerstone for building a brighter and more inclusive future for everyone.",
-    "image":"https://www.khushii.org/wp-content/uploads/2020/11/MASK-1.jpg",
-    "requirements":[{
-        "type" : "Money",
-        "required": 30000
-    },
-    {
-        "type" : "Laptops",
-        "required": 5
+    "project3": {
+        "title": "Education a right",
+        "description": "Our organization is dedicated to empowering marginalized communities by ensuring equal access to high-quality learning experiences.",
+        "image": "https://www.khushii.org/wp-content/uploads/2020/11/MASK-1.jpg",
+        "requirements": {
+            "Money": 30000,
+            "Laptops": 5
+        },
+        "type": "Education",
+        "startDate": "20/08/2016",
+        "userId": "663fca0e19e222cfc329bfc0",
+        "location": "Hyderabad",
+        "donors": [],
+        "volunteers": []
     }
-    
-    ],
-    "type": "Education",
-    "startDate": "20/08/2016",
-    "userId":"663fca0e19e222cfc329bfc0",
-    "location": "Hyderabad",
-    "donors":[],
-    "volunteers": []
-
 }
-
-{
-    "title": "Food for life",
-    "description": "
-    As a food rescue organization specializing in repurposing surplus wedding meals for orphanages, our mission is clear: to combat food waste while aiding vulnerable communities. Through our dedicated team and network of partners, we diligently collect, package, and deliver excess wedding food to shelters and orphanages in need. By redirecting perfectly good meals from events to those facing food insecurity, we not only provide essential nourishment but also promote sustainability and compassion. With a firm commitment to social responsibility, we strive to ensure that every meal serves its purpose, bringing sustenance and hope to those who need it most",
-    "image":"https://www.shutterstock.com/shutterstock/photos/1952430571/display_1500/stock-photo-new-delhi-india-march-volunteers-from-an-ngo-distributing-food-to-poor-needy-people-in-1952430571.jpg"
-    "requirements":[{
-        "type" : "Money",
-        "required": 20000
-    },
-    {
-        "type" : "Volunteer",
-        "required": 5
-    }
-    
-    ],
-    "type": "Food Security",
-    "startDate": "15/06/2017",
-    "userId":"663fc8e719e222cfc329bfbd",
-    "location": "Bangalore",
-    "donors":[],
-    "volunteers": []
-
-}
-
-{
-    "title": "Green is the future",
-    "description": "As an environmentally conscious NGO dedicated to combating deforestation and mitigating the impacts of climate change, our organization is deeply committed to tree planting initiatives. Through strategic partnerships with local communities, government agencies, and corporate sponsors, we spearhead tree planting projects across diverse ecosystems. From urban reforestation efforts to rural afforestation campaigns, our goal is to restore and conserve vital forest habitats while promoting biodiversity and ecosystem resilience. Our tree planting initiatives not only contribute to carbon sequestration and climate regulation but also provide numerous socio-economic benefits, including improved air and water quality, enhanced soil fertility, and sustainable livelihood opportunities for local communities. By harnessing the collective power of tree planting, we strive to create a greener, healthier planet for generations to come.",
-    "image":"https://www.nityango.org/wp-content/uploads/2018/08/envcause-1.jpeg",
-    "requirements":[{
-        "type" : "Money",
-        "required": 10000
-    },
-    {
-        "type" : "Volunteer",
-        "required": 20
-    }
-    
-    ],
-    "type": "Sustaniability",
-    "startDate": "15/06/2017",
-    "userId":"663fc7bab3650a8a463f7dc0",
-    "location": "Delhi",
-    "donors":[],
-    "volunteers": []
-
-}
-
-{
-    "title": "Green World",
-    "description": "As a proactive NGO dedicated to preserving our environment and addressing the challenges of climate change, our organization prioritizes tree planting as a cornerstone of our mission. Through collaborative efforts with local communities, government bodies, and corporate allies, we lead initiatives aimed at planting trees in various ecosystems. From revitalizing urban landscapes to establishing green belts in rural areas, our objective is to safeguard and restore essential forest habitats while fostering biodiversity and ecological resilience. Beyond the vital role of carbon absorption and climate stability, our tree planting endeavors yield significant socio-economic advantages, such as enhanced air and water quality, enriched soil fertility, and sustainable economic prospects for nearby residents. By uniting in our commitment to tree planting, we work towards cultivating a greener, more sustainable planet that thrives for generations to come.",
-    "image":"https://nelda.org.in/wp-content/uploads/2022/08/editor_img_2022-04-20_03-29-57_WbGDqnawHTl13xzE.jpg",
-    "requirements":[{
-        "type" : "Money",
-        "required": 20000
-    },
-    {
-        "type" : "Volunteer",
-        "required": 7
-    }
-    
-    ],
-    "type": "Sustainability",
-    "startDate": "15/06/2017",
-    "userId":"663fc7bab3650a8a463f7dc0",
-    "location": "Jaipur",
-    "donors":[],
-    "volunteers": []
-}
-
-
-
-
-// user --------------------------------
-
-{
-    "name": "Robinhood Foundation",
-    "location": "Chennai",
-    "email": "robinhood@foundation.com",
-    "password": "$2a$10$QY3DcwbA6kSMpkgxVpadOe/8jIMdoR3d3RvYiAKFoc1C56JDGPe8S",
-    "role": "organisation",
-    "image": "https://img.etimg.com/thumb/msid-61052009,width-640,height-480,imgsize-112022,resizemode-4/quite-like-robin-hood.jpg"
-    
-}
-{
-    "name": "Sitaram Jindal Foundation",
-    "location": "Hyderabad",
-    "email": "sitaramjindal@org",
-    "password": "$2a$10$QY3DcwbA6kSMpkgxVpadOe/8jIMdoR3d3RvYiAKFoc1C56JDGPe8S",
-    "role": "organisation",
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTReZop8i0XMjgKqqg-q6_cooCkkVLv1D9e1tHvitGcA&s",
-}
-
-{
-    "name": "Greenpeace Foundation",
-    "location": "Hyderbad",
-    "email": "greenpeace@org.in",
-    "password": "$2a$10$QY3DcwbA6kSMpkgxVpadOe/8jIMdoR3d3RvYiAKFoc1C56JDGPe8S",
-    "role": "organisation",
-    "image": "https://cdn.britannica.com/01/231201-050-A65FA806/Greenpeace-activists-off-coast-Greenland-2011.jpg",
-}
-
-
-
-

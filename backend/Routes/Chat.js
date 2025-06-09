@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const Chat = require("../db/chat");
-const { dbConnect } = require("../db/db");
+const Chat = require("../models/chat");
+const { dbConnect } = require("../models/db");
 
 router.post("/create", async (req, res) => {
     const { userIds } = req.body;

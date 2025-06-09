@@ -66,7 +66,7 @@ const CampaignSchema = new mongoose.Schema({
         default : ""
     },
     location : {
-        type : String,
+        type : String, 
         required : true
     },
     brochure : {
